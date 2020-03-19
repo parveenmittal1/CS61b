@@ -1,7 +1,7 @@
-public class IntList{
+public class IntNode{
     int first;
-    IntList next;
-    IntList(int f,IntList r ){
+    IntNode next;
+    IntNode(int f,IntNode r ){
         first=f;
         next=r;
     }
@@ -18,9 +18,9 @@ public class IntList{
         else return next.get(i-1);
     }
     public static void main(String args[]){
-        IntList l=new IntList(15,null);
-        l=new IntList(10,l);
-        l=new IntList(5,l);
+        IntNode l=new IntNode(15,null);
+        l=new IntNode(10,l);
+        l=new IntNode(5,l);
         System.out.println(l.size());
         System.out.println(l.get(1));
     }
