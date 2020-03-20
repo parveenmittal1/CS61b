@@ -9,9 +9,10 @@ class  SLList{
         }
     }
     private IntNode first;
-
+    public int size
     public SLList(int number){
         first=new IntNode(number,null);
+        size=1;
     }
     public  addLast(int number){
         IntNode LastNode=first;
@@ -19,21 +20,15 @@ class  SLList{
             LastNode=LastNode.next;
         }
         LastNode.next=new IntNode(number);
-    }
-
-    private static int size(){
-        if(next==null){
-            return 1;
-        }
-        return 1+next.size();
+        size++;
     }
 
     public int size(){
-        return size(first);
+        return size;
     }
-
     public void addFirst(int number){
         first=new IntNode(number,first);
+        size++;
     }
     public int getFirst(){
         return first.first;
@@ -41,5 +36,25 @@ class  SLList{
 
     public static  void main(int args[]){
         SLList l=new SLList(10);
+    }
+    public void squareDestructive(IntNode first){
+        if(first.next ==null){
+            first.first=first.first*first.first;
+            return;
+        }
+        else {
+            first.first=first.first*first.first;
+            squareDestructive(first.next);
+            return;
+        }
+    }
+
+    public  void square(IntNode first){
+        if(first.next ==null){
+            return new IntNode(first.first*first.first,null);
+        }
+        else {
+            return new IntNode(first.first*first.first,square(first.next));
+        }
     }
 }
