@@ -1,25 +1,33 @@
 class  SLList{
     private class IntNode {
-        int first;
-        IntNode next;
-
+        private int first;
+        private IntNode next;
         IntNode(int f, IntNode r) {
             first = f;
             next = r;
         }
     }
-    private IntNode first;
-    public int size
+
+    public int size;
+    private IntNode sentinalNode;
+
+    public SLList(){
+            sentinalNode=new IntNode(63,null);
+            size=0;
+    }
+
     public SLList(int number){
-        first=new IntNode(number,null);
+        sentinalNode=new IntNode(63,null);
+        sentinalNode.next=new IntNode(number,null);
         size=1;
     }
-    public  addLast(int number){
-        IntNode LastNode=first;
+
+    public void addLast(int number){
+        IntNode LastNode=sentinalNode;
         while (LastNode.next!=null){
             LastNode=LastNode.next;
         }
-        LastNode.next=new IntNode(number);
+        LastNode.next=new IntNode(number,null);
         size++;
     }
 
@@ -27,34 +35,41 @@ class  SLList{
         return size;
     }
     public void addFirst(int number){
-        first=new IntNode(number,first);
+        sentinalNode.next=new IntNode(number,sentinalNode.next);
         size++;
     }
     public int getFirst(){
-        return first.first;
+        return sentinalNode.next.first;
+    }
+
+    public void squareDestructive(){
+        if(this.sentinalNode.next ==null){
+            return;
+        }
+        else {
+            this.sentinalNode.next.first=this.sentinalNode.next.first*this.sentinalNode.next.first;
+            this.sentinalNode.next.squareDestructive();
+            return;
+        }
+    }
+
+    public  void square(){
+        if(this.sentinalNode.next ==null){
+            return ;
+        }
+        else {
+            SLList s=new SLList();
+            SLList.sentinalNode.next= new IntNode(this.sentinalNode.next.first*this.sentinalNode.next.first,square(this.sentinalNode.next.next));
+        }
     }
 
     public static  void main(int args[]){
         SLList l=new SLList(10);
-    }
-    public void squareDestructive(IntNode first){
-        if(first.next ==null){
-            first.first=first.first*first.first;
-            return;
-        }
-        else {
-            first.first=first.first*first.first;
-            squareDestructive(first.next);
-            return;
-        }
-    }
-
-    public  void square(IntNode first){
-        if(first.next ==null){
-            return new IntNode(first.first*first.first,null);
-        }
-        else {
-            return new IntNode(first.first*first.first,square(first.next));
-        }
+        l.addFirst(5);
+        l.addFirst(15);
+        l.addLast(100);
+        l.squareDestructive();
+        l=l.square();
+        System.out.println(l.size());
     }
 }
