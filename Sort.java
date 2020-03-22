@@ -1,5 +1,5 @@
 class Sort{
-    public sort(String[] ans){
+    public void sort(String[] ans){
 
     }
 }
