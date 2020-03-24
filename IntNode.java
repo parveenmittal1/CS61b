@@ -90,6 +90,36 @@ public class IntNode implements LIST61B{
         }
     }
 
+         /** Non-destructively creates a copy of x that contains no occurences of y.*/
+         public static IntNode ilsans(IntNode x, int y) {
+             IntNode temp;
+             if (x==null) {
+                 return null;
+                 }
+             if (x.first!=y) {
+                 temp=new IntNode(x.first,null);
+                 temp.next=ilsans(x.next,y);
+                 return temp;
+                 }
+              return ilsans(x.next,y);
+             }
+
+         /** Destructively modify and return x to contain no occurences of y,
+ 21 without using the keyword "new". */
+         public static IntNode dilsans(IntNode x, int y) {
+             if (x==null) {
+                 return null;
+                 }
+
+             //To-Do
+             if(x.first != y) {
+                 x.next=dilsans(x.next,y);
+                 return x;
+                 }
+             return dilsans(x.next.y);
+             }
+
+
     public static void main(String args[]){
         IntNode l=new IntNode(15,null);
         l=new IntNode(20,l);
