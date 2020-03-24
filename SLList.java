@@ -1,75 +1,110 @@
-class  SLList{
-    private class IntNode {
-        private int first;
+class  SLList<Bleep> implements LIST61B{
+    private  class IntNode {
+        private Bleep first;
         private IntNode next;
-        IntNode(int f, IntNode r) {
+        private IntNode prev;
+        IntNode(Bleep f, IntNode r) {
+            prev=null;
             first = f;
             next = r;
         }
     }
 
     public int size;
-    private IntNode sentinalNode;
+    private IntNode sentinelNode;
+    private IntNode last;
 
     public SLList(){
-            sentinalNode=new IntNode(63,null);
+        Bleep a = null;
+            sentinelNode =new IntNode(a,null);
+            last=null;
             size=0;
     }
 
-    public SLList(int number){
-        sentinalNode=new IntNode(63,null);
-        sentinalNode.next=new IntNode(number,null);
+    public void insert(Object item, int pos){
+
+    }
+    @Override
+    public void print() {
+        for (IntNode p = sentinelNode.next; p != null; p = p.next) {
+            System.out.println(p.first + " ");
+        }
+    }
+
+
+    public SLList(Bleep number){
+        Bleep a = null;
+        sentinelNode =new IntNode(a,null);
+        sentinelNode.next=new IntNode(number,null);
+        last=sentinelNode.next;
         size=1;
     }
 
-    public void addLast(int number){
-        IntNode LastNode=sentinalNode;
+    public void addLast(Object number){
+        IntNode LastNode= sentinelNode;
         while (LastNode.next!=null){
             LastNode=LastNode.next;
         }
-        LastNode.next=new IntNode(number,null);
+        LastNode.next=new IntNode((Bleep)number,null);
+        last =LastNode.next;
         size++;
     }
 
     public int size(){
         return size;
     }
-    public void addFirst(int number){
-        sentinalNode.next=new IntNode(number,sentinalNode.next);
+    public void addFirst(Object number){
+        sentinelNode.next=new IntNode((Bleep)number, sentinelNode.next);
         size++;
     }
-    public int getFirst(){
-        return sentinalNode.next.first;
+
+    public Bleep getFirst(){
+        return sentinelNode.next.first;
     }
 
-    public void squareDestructive(){
-        if(this.sentinalNode.next ==null){
-            return;
-        }
-        else {
-            this.sentinalNode.next.first=this.sentinalNode.next.first*this.sentinalNode.next.first;
-            this.sentinalNode.next.squareDestructive();
-            return;
-        }
+    @Override
+    public Object getLast() {
+        return null;
     }
 
-    public  void square(){
-        if(this.sentinalNode.next ==null){
-            return ;
-        }
-        else {
-            SLList s=new SLList();
-            SLList.sentinalNode.next= new IntNode(this.sentinalNode.next.first*this.sentinalNode.next.first,square(this.sentinalNode.next.next));
-        }
+    @Override
+    public Object removeLast() {
+        return null;
     }
+
+    @Override
+    public Object get(int i) {
+        return null;
+    }
+
+//    public void squareDestructive(){
+//        if(this.sentinelNode.next ==null){
+//            return;
+//        }
+//        else {
+//            this.sentinelNode.next.first=this.sentinelNode.next.first*this.sentinelNode.next.first;
+//            this.sentinelNode.next.squareDestructive();
+//            return;
+//        }
+//    }
+
+//    public  void square(){
+//        if(this.sentinelNode.next ==null){
+//            return ;
+//        }
+//        else {
+//            SLList s=new SLList();
+//            SLList.sentinelNode.next= new IntNode(this.sentinelNode.next.first*this.sentinelNode.next.first,square(this.sentinelNode.next.next));
+//        }
+//    }
 
     public static  void main(int args[]){
         SLList l=new SLList(10);
         l.addFirst(5);
         l.addFirst(15);
         l.addLast(100);
-        l.squareDestructive();
-        l=l.square();
+       // l.squareDestructive();
+       // l=l.square();
         System.out.println(l.size());
     }
 }
