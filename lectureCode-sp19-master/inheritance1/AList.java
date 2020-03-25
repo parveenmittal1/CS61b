@@ -27,10 +27,8 @@ public class AList<Item> implements List61B<Item> {
     @Override
     public void insert(Item x, int position) {
         Item[] newItems = (Item[]) new Object[items.length + 1];
-
         System.arraycopy(items, 0, newItems, 0, position);
         newItems[position] = x;
-
         System.arraycopy(items, position, newItems, position + 1, items.length - position);
         items = newItems;
     }
@@ -52,7 +50,7 @@ public class AList<Item> implements List61B<Item> {
     @Override
     public void addLast(Item x) {
         if (size == items.length) {
-            resize(size + 1);
+            resize(size*2);
         }
 
         items[size] = x;
