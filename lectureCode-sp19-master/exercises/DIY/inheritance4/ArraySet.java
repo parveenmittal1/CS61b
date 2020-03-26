@@ -21,7 +21,7 @@ public class ArraySet<T> {
     }
 
     public static void main(String[] args) {
-        ArraySet<String> s = new ArraySet<>();
+        ArrSet<String> s = new ArrSet<>();
         s.add(null);
         s.add("horse");
         s.add("fish");

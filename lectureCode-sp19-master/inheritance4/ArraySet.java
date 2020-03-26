@@ -104,7 +104,7 @@ public class ArraySet<T> implements Iterable<T> {
         if (other.getClass() != this.getClass()) {
             return false;
         }
-        ArraySet<T> o = (ArraySet<T>) other;
+        ArrSet<T> o = (ArrSet<T>) other;
         if (o.size() != this.size()) {
             return false;
         }
@@ -117,7 +117,7 @@ public class ArraySet<T> implements Iterable<T> {
     }
 
     public static void main(String[] args) {
-        ArraySet<Integer> aset = new ArraySet<>();
+        ArrSet<Integer> aset = new ArrSet<>();
         aset.add(5);
         aset.add(23);
         aset.add(42);
@@ -131,7 +131,7 @@ public class ArraySet<T> implements Iterable<T> {
         System.out.println(aset);
 
         //equals
-        ArraySet<Integer> aset2 = new ArraySet<>();
+        ArrSet<Integer> aset2 = new ArrSet<>();
         aset2.add(5);
         aset2.add(23);
         aset2.add(42);
