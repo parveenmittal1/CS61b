@@ -1,6 +1,6 @@
 public class SpeedTestSLList {
 	public static void main(String[] args) {
-		SLList<Integer> L = new SLList<>();
+		SLLList<Integer> L = new SLLList<>();
 		int i = 0;
 		while (i < 10000000) {
 			L.addFirst(i);

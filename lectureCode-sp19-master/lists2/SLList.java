@@ -17,7 +17,7 @@ public class SLList {
 	private int size;
 
 	private static void lectureQuestion() {
-		SLList L = new SLList();
+		SLLList L = new SLLList();
 		IntNode n = IntNode(5, null);
 	}
 
@@ -65,7 +65,7 @@ public class SLList {
 
 	public static void main(String[] args) {
  		/* Creates a list of one integer, namely 10 */
- 		SLList L = new SLList();
+ 		SLLList L = new SLLList();
  		L.addLast(20);
  		System.out.println(L.size());
  	}

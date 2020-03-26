@@ -118,7 +118,7 @@ public class SLList<Blorp> {
 
 	public static void main(String[] args) {
  		/* Creates a list of one integer, namely 10 */
- 		SLList L = new SLList();
+ 		SLLList L = new SLLList();
  		L.addLast(20);
  		System.out.println(L.size());
  	}

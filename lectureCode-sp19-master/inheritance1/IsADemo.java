@@ -1,6 +1,6 @@
 public class IsADemo {
     public static void main(String[] args) {
-        List61B<String> someList = new SLList<>();
+        List61B<String> someList = new SLLList<>();
         someList.addFirst("elk");
         someList.addLast("dwell");
         someList.addLast("on");

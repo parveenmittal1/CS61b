@@ -1,7 +1,7 @@
-    public class  Dog {
+    public class  Dogs implements Comparable<Dogs> {
     public int weightInPound;
 
-    public Dog(int w) {
+    public Dogs(int w) {
         weightInPound = w;
     }
     public  void makeNoise() {
@@ -14,7 +14,14 @@
             System.out.println("woof");
         }
     }
-    public static Dog biggerDog(Dog d1,Dog d2){
+    public static Dogs biggerDog(Dogs d1,Dogs d2){
         return  d1.weightInPound > d2.weightInPound ? d1 : d2;
     }
-}
+
+
+    @Override
+        public int compareTo(Dogs d){
+
+            return this.weightInPound-d.weightInPound;
+        }
+    }

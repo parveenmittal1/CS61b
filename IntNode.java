@@ -1,139 +1,88 @@
-public class IntNode implements LIST61B{
-    int first;
-    IntNode next;
-    IntNode(int f,IntNode r ){
-        first=f;
-        next=r;
+/** Array based list.
+ *  @author Josh Hug
+ */
+
+//         0 1  2 3 4 5 6 7
+// items: [6 9 -1 2 0 0 0 0 ...]
+// size: 5
+
+/* Invariants:
+ addLast: The next item we want to add, will go into position size
+ getLast: The item we want to return is in position size - 1
+ size: The number of items in the list should be size.
+*/
+
+public class IntNode<Item> implements LIST61B<Item> {
+    private Item[] items;
+    private int size;
+
+    /** Creates an empty list. */
+    public IntNode() {
+        items = (Item[]) new Object[100];
+        size = 0;
     }
-    public int size(){
-        if(next==null){
-            return 1;
-        }
-        return 1+next.size();
+
+    /** Inserts item into given position.
+     * Code from discussion #3 */
+    @Override
+    public void insert(Item x, int position) {
+        Item[] newItems = (Item[]) new Object[items.length + 1];
+        System.arraycopy(items, 0, newItems, 0, position);
+        newItems[position] = x;
+        System.arraycopy(items, position, newItems, position + 1, items.length - position);
+        items = newItems;
     }
-    public int iterativeSize(){
-        IntNode temp=this;
-        int size=0;
-        while(temp!=null){
-            temp=temp.next;
-            size++;
+
+    /** Resizes the underlying array to the target capacity. */
+    private void resize(int capacity) {
+        Item[] a = (Item[]) new Object[capacity];
+        System.arraycopy(items, 0, a, 0, size);
+        items = a;
+    }
+
+    /** Inserts an item at the front. */
+    @Override
+    public void addFirst(Item x) {
+        insert(x, 0);
+    }
+
+    /** Inserts X into the back of the list. */
+    @Override
+    public void addLast(Item x) {
+        if (size == items.length) {
+            resize(size*2);
         }
+
+        items[size] = x;
+        size = size + 1;
+    }
+
+    /** Gets an item from the front. */
+    @Override
+    public Item getFirst() {
+        return get(0);
+    }
+
+    /** Returns the item from the back of the list. */
+    public Item getLast() {
+        return items[size - 1];
+    }
+    /** Gets the ith item in the list (0 is the front). */
+    public Item get(int i) {
+        return items[i];
+    }
+
+    /** Returns the number of items in the list. */
+    public int size() {
         return size;
     }
 
-    @Override
-    public void addFirst(Object x) {
-
-    }
-
-    @Override
-    public void addLast(Object y) {
-
-    }
-
-    @Override
-    public Object getFirst() {
-        return null;
-    }
-
-    @Override
-    public Object getLast() {
-        return null;
-    }
-
-    @Override
-    public Object removeLast() {
-        return null;
-    }
-
-    public Object get(int i){
-        if(i==0){
-            return this.first;
-        }
-        else return next.get(i-1);
-    }
-
-    @Override
-    public void insert(Object x, int position) {
-
-    }
-
-
-    public void addAdjacent(){
-        if(next==null){
-            return;
-        }
-        if(this.first==next.first){
-            this.next.first=this.first+this.next.first;
-            this.next.addAdjacent();
-            this.next=null;
-        }
-        else{
-            this.next.addAdjacent();
-        }
-    }
-
-
-    public void skippify() {
-        IntNode p = this;
-        int n = 1;
-        while (p != null) {
-            IntNode next = p;
-            for (int i=0;i<n;i++) {
-                if (p!=null) {
-                    p=p.next;
-                }
-            }
-            next.next=p.next;
-            n++;
-            p=p.next;
-        }
-    }
-
-         /** Non-destructively creates a copy of x that contains no occurences of y.*/
-         public static IntNode ilsans(IntNode x, int y) {
-             IntNode temp;
-             if (x==null) {
-                 return null;
-                 }
-             if (x.first!=y) {
-                 temp=new IntNode(x.first,null);
-                 temp.next=ilsans(x.next,y);
-                 return temp;
-                 }
-              return ilsans(x.next,y);
-             }
-
-         /** Destructively modify and return x to contain no occurences of y,
- 21 without using the keyword "new". */
-         public static IntNode dilsans(IntNode x, int y) {
-             if (x==null) {
-                 return null;
-                 }
-
-             //To-Do
-             if(x.first != y) {
-                 x.next=dilsans(x.next,y);
-                 return x;
-                 }
-             return dilsans(x.next.y);
-             }
-
-
-    public static void main(String args[]){
-        IntNode l=new IntNode(15,null);
-        l=new IntNode(20,l);
-        l=new IntNode(10,l);
-        l=new IntNode(5,l);
-        l=new IntNode(5,l);
-
-        System.out.println(l.size());
-        System.out.println(l.get(1));
-        System.out.println(l.iterativeSize());
-        l.addAdjacent();
-        System.out.println(l.size());
-        l.skippify();
-        System.out.println(l.iterativeSize());
-
+    /** Deletes item from back of the list and
+     * returns deleted item. */
+    public Item removeLast() {
+        Item x = getLast();
+        items[size - 1] = null;
+        size = size - 1;
+        return x;
     }
 }

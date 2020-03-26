@@ -58,7 +58,7 @@ public class SLList<Blah> {
  	}
 
  	public static void main(String[] args) {
- 		SLList<Integer> L = new SLList<>();
+ 		SLLList<Integer> L = new SLLList<>();
  	
  	}
 }
