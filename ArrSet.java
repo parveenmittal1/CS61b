@@ -62,10 +62,48 @@ public class ArrSet<T>  implements Iterable<T>{
     }
     @Override
     public String toString() {
-        return "ArrSet{" +
-                "tList=" + Arrays.toString(tList) +
-                '}';
+        StringBuilder SB=new StringBuilder("{");
+        for(int i=0;i<size-1;i++){
+            SB.append(tList[i]);
+            SB.append(",");
+        }
+        SB.append(tList[size-1]);
+        SB.append("}");
+        return SB.toString();
     }
+
+    @Override
+    public boolean equals(Object other){
+        if(other==null){
+            return false;
+        }
+        if(this==other){
+            return true;
+        }
+        if(getClass()!=other.getClass()){
+            return false;
+        }
+        ArrSet o=(ArrSet) other;
+        if(this.size!=o.size()){
+            return false;
+        }
+        for(T item:this) {
+        if(!o.contains(item)){
+            return false;
+        }
+        }
+        return true;
+    }
+
+
+    public  static <GL> ArrSet<GL> of(GL... stuff){
+        ArrSet<GL> returnSet = new ArrSet<GL>();
+        for(GL x:stuff){
+            returnSet.add(x);
+        }
+        return returnSet;
+    }
+    
     public static void main(String[] args) {
         Set<Integer> javaSet=new HashSet<>();
         javaSet.add(1);
@@ -76,6 +114,8 @@ public class ArrSet<T>  implements Iterable<T>{
         while(seer.hasNext()){
             System.out.println(seer.next());
         }
+        System.out.println(javaSet);
+
 
         ArrSet<String> aSet = new ArrSet<>();
         aSet.add(null);
@@ -84,8 +124,12 @@ public class ArrSet<T>  implements Iterable<T>{
         aSet.add("house");
         aSet.add("fish");
         Iterator<String> aseer=aSet.iterator();
+        System.out.println(aSet);
         while (aseer.hasNext()){
             System.out.println(aseer.next());
+        }
+        for(String i:aSet){
+            System.out.println(i);
         }
         System.out.println(aSet.contains("horse"));
         System.out.println(aSet.size());
